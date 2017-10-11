@@ -18,7 +18,7 @@
 	</div>
 	<div id="container">
 		<h3>Add Student</h3>
-		<form action="StudentControlerServlet" method="GET">
+		<form action="StudentControlerServlet" method="POST">
 		
 			<input type="hidden" name="command" value="ADD" />
 			
