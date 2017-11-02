@@ -1,7 +1,9 @@
 package com.luv2code.web.jdbc;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.RequestDispatcher;
@@ -11,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
+
+import com.newrelic.api.agent.NewRelic;
 
 /**
  * Servlet implementation class StudentControlerServlet
@@ -71,8 +75,14 @@ public class StudentControlerServlet extends HttpServlet {
 				updateStudent(request, response);
 				
 			case "DELETE":
+
 				deleteStudent(request, response);
-				
+				String message ="Error Test";
+				Map<String, Object> eventAttributes = new HashMap<String, Object>();
+				eventAttributes.put("Error", message);
+				NewRelic.getAgent().getInsights().recordCustomEvent("deleted", eventAttributes );
+
+
 			default:
 				listStudents(request, response);
 				
